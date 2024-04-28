@@ -1,22 +1,26 @@
+import { IoMdMenu } from "react-icons/io";
+import { GrAppsRounded } from "react-icons/gr";
 import { useEffect } from "react";
 import { useRef, useState } from "react";
-import Card from "../components/Card"
+import Card from "../components/Card";
 
 function Products() {
   const [data, setData] = useState([]);
-
+  const [isGrid, setGrid] = useState(true);
   const searchRef = useRef(null);
   const categoryRef = useRef(null);
   const companyRef = useRef(null);
   const sortRef = useRef(null);
-  const [price, setPrice] = useState(10000)
+  const [price, setPrice] = useState(10000);
   const [shipping, setShipping] = useState(false);
 
-  async function getData(url = 'https://strapi-store-server.onrender.com/api/products') {
+  async function getData(
+    url = "https://strapi-store-server.onrender.com/api/products"
+  ) {
     try {
       const res = await fetch(url);
       const responseData = await res.json();
-      setData(responseData.data)
+      setData(responseData.data);
     } catch (error) {
       console.log(error);
     }
@@ -24,17 +28,15 @@ function Products() {
 
   useEffect(() => {
     getData();
-  }, [])
+  }, []);
 
-  function handleFilter() {
-
-  }
+  function handleFilter() {}
 
   function handleReset() {
     searchRef.current.value = null;
-    categoryRef.current.value = 'all';
-    companyRef.current.value = 'all';
-    sortRef.current.value = 'a-z';
+    categoryRef.current.value = "all";
+    companyRef.current.value = "all";
+    sortRef.current.value = "a-z";
     setPrice(10000);
     setShipping(false);
   }
@@ -59,35 +61,50 @@ function Products() {
 
             <div className="flex flex-col gap-2 w-[244px]">
               <span className="opacity-75 ">Select Category</span>
-              <select ref={categoryRef} className="select select-bordered select-sm w-full max-w-xs">
-                <option value='all' selected>all</option>
-                <option value='Tables'>Tables</option>
-                <option value='Chairs'>Chairs</option>
-                <option value='Kids'>Kids</option>
-                <option value='Sofas'>Sofas</option>
-                <option value='Beds'>Beds</option>
+              <select
+                ref={categoryRef}
+                className="select select-bordered select-sm w-full max-w-xs"
+              >
+                <option value="all" selected>
+                  all
+                </option>
+                <option value="Tables">Tables</option>
+                <option value="Chairs">Chairs</option>
+                <option value="Kids">Kids</option>
+                <option value="Sofas">Sofas</option>
+                <option value="Beds">Beds</option>
               </select>
             </div>
 
             <div className="flex flex-col gap-2 w-[244px]">
               <span className="opacity-75 ">Select Company</span>
-              <select ref={companyRef} className="select select-bordered select-sm w-full max-w-xs">
-                <option value='all' selected>all</option>
-                <option value='Modenza'>Modenza</option>
-                <option value='Luxora'>Luxora</option>
-                <option value='Artifex'>Artifex</option>
-                <option value='Comfora'>Comfora</option>
-                <option value='Homestead'>Homestead</option>
+              <select
+                ref={companyRef}
+                className="select select-bordered select-sm w-full max-w-xs"
+              >
+                <option value="all" selected>
+                  all
+                </option>
+                <option value="Modenza">Modenza</option>
+                <option value="Luxora">Luxora</option>
+                <option value="Artifex">Artifex</option>
+                <option value="Comfora">Comfora</option>
+                <option value="Homestead">Homestead</option>
               </select>
             </div>
 
             <div className="flex flex-col gap-2 w-[244px]">
               <span className="opacity-75 ">Sort By</span>
-              <select ref={sortRef} className="select select-bordered select-sm w-full max-w-xs">
-                <option value='a-z' selected>a-z</option>
-                <option value='z-a'>z-a</option>
-                <option value='high'>high</option>
-                <option value='low'>low</option>
+              <select
+                ref={sortRef}
+                className="select select-bordered select-sm w-full max-w-xs"
+              >
+                <option value="a-z" selected>
+                  a-z
+                </option>
+                <option value="z-a">z-a</option>
+                <option value="high">high</option>
+                <option value="low">low</option>
               </select>
             </div>
           </div>
@@ -106,7 +123,9 @@ function Products() {
                     max="1000"
                     className="range range-primary"
                     value={price}
-                    onChange={(e) => {setPrice(e.target.value)}}
+                    onChange={(e) => {
+                      setPrice(e.target.value);
+                    }}
                   />
                 </div>
                 <div className="range-max-min flex justify-between mt-1">
@@ -124,28 +143,69 @@ function Products() {
                     type="checkbox"
                     className="checkbox checkbox-primary"
                     checked={shipping}
-                    onChange={(e) => {setShipping(e.target.value)}}
+                    onChange={(e) => {
+                      setShipping(e.target.value);
+                    }}
                   />
                 </label>
               </div>
             </div>
 
             <div className="search-input">
-              <button onClick={handleFilter} className="btn btn-primary w-[230px]">SEARCH</button>
+              <button
+                onClick={handleFilter}
+                className="btn btn-primary w-[230px]"
+              >
+                SEARCH
+              </button>
             </div>
 
             <div className="reset-input">
-              <button onClick={handleReset} className="btn btn-secondary w-[230px]">RESET</button>
+              <button
+                onClick={handleReset}
+                className="btn btn-secondary w-[230px]"
+              >
+                RESET
+              </button>
             </div>
           </div>
         </div>
 
-        <div className="products flex justify-between flex-wrap gap-3 mb-20">
-          {
-            data.length > 0 && data.map((el, index) => {
-              return(<Card key={index} data={el}></Card>)
-            })
-          }
+        <div className="flex items-center justify-between border-b-2 pb-6 mt-14">
+          <p>22 products</p>
+          <div className="flex text-2xl gap-2">
+            <span onClick={() => {setGrid(true)}}
+              className="cursor-pointer flex justify-center items-center"
+              style={isGrid ? {
+                width: "40px",
+                height: "40px",
+                backgroundColor: "blue",
+                color: "white",
+                borderRadius: "50%",
+              } : {}}
+            >
+              <GrAppsRounded />
+            </span>
+            <span onClick={() => {setGrid(false)}}
+              className="cursor-pointer flex justify-center items-center"
+              style={!isGrid ? {
+                width: "40px",
+                height: "40px",
+                backgroundColor: "blue",
+                color: "white",
+                borderRadius: "50%",
+              } : {}}
+            >
+              <IoMdMenu />
+            </span>
+          </div>
+        </div>
+
+        <div className={`products flex justify-between flex-wrap gap-3 mb-20 ${isGrid ? 'flex' : 'flex-col'}`}>
+          {data.length > 0 &&
+            data.map((el, index) => {
+              return <Card isGrid={isGrid} key={index} data={el}></Card>
+            })}
         </div>
       </div>
     </>

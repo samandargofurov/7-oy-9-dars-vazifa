@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 
 function Card(props) {
-
-  const {title, price, image} = props.data.attributes;
+  const {title, price, company, image} = props.data.attributes;
   const {id} = props.data;
+  const { isGrid } = props
   const navigate = useNavigate();
 
   function handleRedirect(e) {
@@ -14,17 +14,22 @@ function Card(props) {
 
   return (
     <>
-      <div onClick={handleRedirect} className="card w-80 bg-base-100 mt-20 shadow-xl transition duration-400 hover:shadow-2xl">
-        <figure className="px-5 pt-5">
-          <img
-            src={image}
-            alt="comfy store"
-            className="rounded-lg bg-cover w-96 h-72"
-          />
-        </figure>
-        <div className="card-body items-center text-center">
-            <p className="card-title">{title}</p>
-            <p className="text-accent-content">${price / 100}</p>
+      <div onClick={handleRedirect} className={`card ${isGrid ? 'w-80' : 'w-full'} bg-base-100 mt-10 shadow-xl transition duration-400 hover:shadow-2xl`}>
+        <div className={`${isGrid ? 'flex-col' : 'flex items-start'}`}>
+          <figure className={`${isGrid ? 'px-5 pt-5' : 'p-6'}`}>
+            <img
+              src={image}
+              alt="comfy store"
+              className={`rounded-lg bg-cover ${isGrid ? 'w-96 h-72' : 'w-36 h-40'}`}
+            />
+          </figure>
+          <div className={`card-body ${isGrid ? 'items-center text-center' : 'flex justify-end'}`}>
+              <div className="flex flex-col gap-2">
+                <p className="card-title">{title}</p>
+                <p className={`${isGrid ? '' : 'card-title opacity-35 text-gray-600 text-sm'}`}>{isGrid ? '' : company}</p>
+              </div>
+          </div>
+          <p className="text-accent-content text-center">${price / 100}</p>
         </div>
       </div>
     </>

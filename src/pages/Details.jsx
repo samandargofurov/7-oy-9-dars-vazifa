@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
 
 function Details() {
   const [data, setData] = useState({});
@@ -37,12 +36,11 @@ function Details() {
   }, []);
 
   function handleSave() {
-    toast.success("Item added to cart");
+
   }
 
   return (
     <div className={"container w-3/4 mx-auto pt-10 pb-20"}>
-      <Toaster position="top-center" reverseOrder={false} />
       {loading && (
         <span className="loading loading-ring loading-lg block mx-auto mt-60"></span>
       )}

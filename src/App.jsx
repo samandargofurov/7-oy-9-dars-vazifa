@@ -75,7 +75,7 @@ function App() {
       <Route
         path="/checkout"
         element={
-          <ProtectedRoute isAuthentication={false}>
+          <ProtectedRoute isAuthentication={true}>
             <Layout>
               <Checkout></Checkout>
             </Layout>
@@ -85,7 +85,7 @@ function App() {
       <Route
         path="/orders"
         element={
-          <ProtectedRoute isAuthentication={false}>
+          <ProtectedRoute isAuthentication={true}>
             <Layout>
               <Orders></Orders>
             </Layout>

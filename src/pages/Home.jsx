@@ -3,6 +3,8 @@ import hero2 from "../assets/hero2.webp";
 import hero3 from "../assets/hero3.webp";
 import hero4 from "../assets/hero4.webp";
 import { Link } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import HomeCard from "../components/HomeCard";
 import { useEffect, useState } from "react";
 
@@ -33,6 +35,18 @@ function Home() {
 
       {!loading && (
         <>
+        <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
           <div className="container w-3/4 mx-auto mt-10">
             <div className="flex items-center justify-between">
               <div className="w-[496px] flex flex-col gap-10 mt-10">

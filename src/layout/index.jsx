@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom"
 import Header from "../components/Header"
+import login from '../pages/Login'
 
 function Layout({children}) {
   return (

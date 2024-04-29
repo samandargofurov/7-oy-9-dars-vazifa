@@ -27,7 +27,7 @@ function Register() {
     }
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(enteredEmail)) {
-      alert("Iltimos, to'g'ri elektron pochta manzili kiriting.");
+      alert("please, enter email");
       return;
     }
     const user = {

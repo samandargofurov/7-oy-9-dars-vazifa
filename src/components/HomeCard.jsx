@@ -22,7 +22,7 @@ function Card(props) {
               className="rounded-lg bg-cover w-96 h-72"
             />
           </figure>
-          <div className="card-body flex items-center">
+          <div className="card-body flex items-center mt-[-25px]">
             <p className="card-title text-center">{title}</p>
             <p className="text-accent-content">${price / 100}</p>
           </div>

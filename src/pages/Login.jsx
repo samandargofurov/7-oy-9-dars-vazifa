@@ -72,18 +72,6 @@ function Login() {
 
   return (
     <>
-      <ToastContainer
-      position="top-center"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="light"
-      />
       <div className="container w-3/5 mx-auto">
         <NavLink to='/' className="flex justify-start text-3xl mt-10"><IoReturnUpBackSharp></IoReturnUpBackSharp></NavLink>
         <div className="w-[385px] shadow-xl mx-auto mt-8 p-8 rounded-2xl">

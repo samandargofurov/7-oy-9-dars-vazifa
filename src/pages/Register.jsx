@@ -1,121 +1,107 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { IoReturnUpBackSharp } from "react-icons/io5";
-import { NavLink, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 function Register() {
-  const [ users, setUsers ] = useState([]);
-  const nameRef = useRef(null);
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
   const navigate = useNavigate();
+  const nameRef = useRef("");
+  const emailRef = useRef("");
+  const passwordRef = useRef("");
 
   useEffect(() => {
-    let user = getUsers();
-    setUsers(user);
-  }, [])
-
-  function validate(name, email, password){
-    if (name.trim().length > 3) {
-      alert('name has an error');
-      console.log(name);
+    const LoggedIn = JSON.parse(localStorage.getItem("logged"));
+    if (!LoggedIn) {
+      localStorage.setItem("logged", JSON.stringify(true));
+      window.location.reload();
     }
+  }, []);
 
-    if (email.value.trim().length < 3) {
-      alert('email has an error');
+  function handleSave(e) {
+    e.preventDefault();
+    const enteredUsername = username.current.value.trim();
+    const enteredEmail = email.current.value.trim();
+    const enteredPassword = password.current.value.trim();
+    if ((enteredUsername === "", enteredEmail === "", enteredPassword === "")) {
+      alert("please Enter email");
       return false;
     }
-  
-    if (password < 0 && password > 3) {
-      alert('password has an error')
-      return false
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(enteredEmail)) {
+      alert("Iltimos, to'g'ri elektron pochta manzili kiriting.");
+      return;
     }
-
-    return true
-  }
-
-  function getUsers() {
-    let users = [];
-
-    if (localStorage.getItem(users)) {
-      users = JSON.parse(localStorage.setItem('users'))
-    }
-
-    return users
-}
-
-   
-  function handleClick(e) {
-    e.preventDefault();
-    const isValid = validate(name, password);
-
-    if (isValid) {
-      const user = {
-        name: nameRef.current.value,
-        email: emailRef.current.value,
-        password: passwordRef.current.value,
-      }
-
-      let copied = JSON.parse(JSON.stringify(users))
-      copied.push(user);
-      localStorage.setItem('users', JSON.stringify(copied));
-      setUsers(copied)
-      navigate('/login')
-    }
-    setTimeout(() => {
-        toast.success('Welcome guest user');
-    }, 100);
-    
-    nameRef.current.value = null;
-    emailRef.current.value = null;
-    passwordRef.current.value = null;
+    const user = {
+      name: enteredUsername,
+      email: enteredEmail,
+      password: enteredPassword,
+    };
+    localStorage.setItem("user", JSON.stringify(user));
+    navigate("/login");
   }
 
   return (
     <>
-    <ToastContainer />
-      <div className="container w-3/5 mx-auto">
-        <NavLink to='/' className="flex justify-start text-3xl mt-8"><IoReturnUpBackSharp></IoReturnUpBackSharp></NavLink>
-        <div className="w-[385px] shadow-xl mx-auto mt-8 p-8 rounded-2xl">
-          <h2 className="text-center font-bold text-3xl pb-6">Register</h2>
-          <div className="flex flex-col gap-7">
-          <label htmlFor="name" className="text-xs">
-              <span className="pl-2">Username</span>
-              <input ref={nameRef}
-                type="text"
+      <div>
+      <NavLink to="/" className="flex ml-80 text-3xl pt-14">
+        <IoReturnUpBackSharp></IoReturnUpBackSharp>
+      </NavLink>
+        <div className="card w-96 m-auto p-8 bg-base-100 shadow-lg flex flex-col gap-y-4">
+          <h2 className="text-center text-3xl font-bold mb-5">Register</h2>
+          <form>
+            <div className="mb-6 flex flex-col">
+              <label htmlFor="email" className="text-xs">
+                Username
+              </label>
+              <input
+                ref={nameRef}
+                type="name"
                 className="input input-bordered mt-2 w-full max-w-xs"
                 id="name"
               />
-            </label>
+            </div>
 
-            <label htmlFor="email" className="text-xs">
-              <span className="pl-2">Email</span>
-              <input ref={emailRef}
+            <div className="mb-6 flex flex-col">
+              <label htmlFor="email" className="text-xs">
+                Email
+              </label>
+              <input
+                ref={emailRef}
                 type="email"
                 className="input input-bordered mt-2 w-full max-w-xs"
                 id="email"
               />
-            </label>
+            </div>
 
-            <label htmlFor="password" className="text-xs">
-              <span className="pl-2">Password</span>
-              <input ref={passwordRef}
+            <div className="mb-6 flex flex-col">
+              <label htmlFor="email" className="text-xs">
+                Password
+              </label>
+              <input
+                ref={passwordRef}
                 type="password"
-                className="input input-bordered mt-1 w-full max-w-xs"
+                className="input input-bordered mt-2 w-full max-w-xs"
                 id="password"
               />
-            </label>
-            <div className="flex flex-col gap-4 mt-2">
-              <button onClick={handleClick} className="btn btn-info text-white">REGISTER</button>
             </div>
+          </form>
+
+          <div className="text-center mb-3">
+            <button
+              onClick={handleSave}
+              className="btn btn-info text-white w-full"
+            >
+              Register
+            </button>
           </div>
-            <div className="flex gap-3 items-center justify-center mt-5">
-              <p className="text-sm">Already a member?</p>
-              <NavLink to='/login' className='text-info text-sm hover:underline'>Login</NavLink>
-            </div>
+
+          <div className="text-center flex justify-center gap-6">
+            Already a member?{" "}
+            <Link to="/login" className="text-info hover:underline">
+              Login
+            </Link>
+          </div>
         </div>
-      </div>
+      </div>  
     </>
   );
 }

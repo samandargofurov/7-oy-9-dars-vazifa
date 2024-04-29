@@ -3,7 +3,7 @@ import hero2 from "../assets/hero2.webp";
 import hero3 from "../assets/hero3.webp";
 import hero4 from "../assets/hero4.webp";
 import { Link } from "react-router-dom";
-import Card from "../components/Card";
+import HomeCard from "../components/HomeCard";
 import { useEffect, useState } from "react";
 
 function Home() {
@@ -91,7 +91,7 @@ function Home() {
               <div className="flex justify-between gap-5">
                 {featured.length > 0 &&
                   featured.map((el, index) => {
-                    return <Card key={index} data={el}></Card>;
+                    return <HomeCard key={index} data={el}></HomeCard>;
                   })}
               </div>
             </div>

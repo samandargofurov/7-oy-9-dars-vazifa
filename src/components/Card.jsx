@@ -15,7 +15,7 @@ function Card(props) {
   return (
     <>
       <div onClick={handleRedirect} className={`card ${isGrid ? 'w-80' : 'w-full'} bg-base-100 mt-10 shadow-xl transition duration-400 hover:shadow-2xl`}>
-        <div className={`${isGrid ? 'flex-col' : 'flex items-start'}`}>
+        <div className={`${isGrid ? 'flex-col' : 'flex justify-between items-start'}`}>
           <figure className={`${isGrid ? 'px-5 pt-5' : 'p-6'}`}>
             <img
               src={image}
@@ -24,12 +24,12 @@ function Card(props) {
             />
           </figure>
           <div className={`card-body ${isGrid ? 'items-center text-center' : 'flex justify-end'}`}>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col">
                 <p className="card-title">{title}</p>
                 <p className={`${isGrid ? '' : 'card-title opacity-35 text-gray-600 text-sm'}`}>{isGrid ? '' : company}</p>
               </div>
           </div>
-          <p className="text-accent-content text-center">${price / 100}</p>
+          <p className={`text-accent-content text-center ${isGrid ? 'mb-5 mt-[-18px]' : 'mt-9 mr-10'}`}>${price / 100}</p>
         </div>
       </div>
     </>

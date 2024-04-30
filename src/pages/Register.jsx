@@ -18,23 +18,23 @@ function Register() {
 
   function handleSave(e) {
     e.preventDefault();
-    const enteredUsername = username.current.value.trim();
-    const enteredEmail = email.current.value.trim();
-    const enteredPassword = password.current.value.trim();
-    if ((enteredUsername === "", enteredEmail === "", enteredPassword === "")) {
+    const username = nameRef.current.value.trim();
+    const email = emailRef.current.value.trim();
+    const password = passwordRef.current.value.trim();
+    if ((username === "", email === "", password === "")) {
       alert("please Enter email");
       return false;
     }
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(enteredEmail)) {
+    if (!emailPattern.test(email)) {
       alert("please, enter email");
       return;
     }
     const user = {
-      name: enteredUsername,
-      email: enteredEmail,
-      password: enteredPassword,
-    };
+      name: username,
+      email: email,
+      password: password,
+    }
     localStorage.setItem("user", JSON.stringify(user));
     navigate("/login");
   }

@@ -28,25 +28,25 @@ function Cart() {
                   />
                 </div>
                 <div className="title">
-                  <h2 className="capitalize font-medium">sjkdncszdc</h2>
+                  <h2 className="capitalize font-medium text-md">sjkdncszdc</h2>
                   <p className="mt-2 capitalize text-sm text-neutral-content">
                     luxora
                   </p>
                   <p className="mt-4 text-sm capitalize flex items-center gap-x-2">
                     Color:
                     <span
-                      className="w-5 h-5 rounded-full"
+                      className="bg-black w-4 h-4 rounded-full"
                     ></span>
                   </p>
                 </div>
                 <div className="form flex flex-col gap-2">
-                  <label htmlFor="select">Amount</label>
+                  <label htmlFor="select text-sm">Amount</label>
                   <select
                     name="select"
                     id="select"
-                    className="select select-bordered select-sm w-30 h-2"
+                    className="select select-bordered select-sm w-10 h-2"
                   >
-                    <option value="">1</option>
+                    <option value="" default>1</option>
                     <option value="">2</option>
                     <option value="">3</option>
                     <option value="">4</option>
@@ -63,6 +63,7 @@ function Cart() {
                 </div>
               </div>
           </div>
+          
             <div className="flex flex-col gap-7">
             <div className="card bg-[#F0F6FF] px-7 py-7 mt-7 w-[330px]">
               <div className="flex flex-col gap-3">
